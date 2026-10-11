@@ -94,13 +94,13 @@ This preserves the important property that an already-satisfied project does not
 
 Core 1.4.0 calls this package's existing resolver and passes the resulting `ResolvedAdapterRelease` to `AdapterManager.install_resolved`. GitHub transport stays in this package; lifecycle semantics stay in Core. No generic provider protocol is introduced.
 
-The coordinated product install uses exact wheel assets and an SHA-256-bound requirements manifest from the Core release. This 0.1.0 candidate is unpublished pending review.
+The coordinated product installation uses exact wheel assets and the SHA-256-bound `orbitfabric-install.txt` manifest from published [Core v1.4.0](https://github.com/OrbitFabric/orbitfabric/releases/tag/v1.4.0). This GitHub Release Source [v0.1.0](https://github.com/OrbitFabric/orbitfabric-github-release-source/releases/tag/v0.1.0) was published on 2026-09-25; no PyPI publication is assumed. The published product does not promote Core-owned adapter lifecycle or integration contracts from candidate to stable. See [public adapter onboarding](https://github.com/OrbitFabric/orbitfabric/blob/main/docs/reference/public-adapter-onboarding.md) for the consumer install path.
 
 ## Development baseline
 
-OrbitFabric Core `v1.3.0` is now the public Core baseline that provides the provider-neutral Catalog API and CLI required by this product.
+OrbitFabric Core `v1.3.0` introduced the provider-neutral Catalog API and CLI required by this product. The coordinated published consumer onboarding baseline is Core `v1.4.0`.
 
-Current development remains validated against the exact pre-release Core integration commit:
+The repository's pinned development/CI integration baseline remains the exact Core commit:
 
 ```text
 714403034b49b7b7c67fcf42ab2c14feff79295f
@@ -114,8 +114,20 @@ orbitfabric>=1.3,<2
 
 Core `1.2.x` does not contain the Catalog API or consumer CLI used by this product.
 
-## Current status
+## Published release status
 
-Pre-release productization. The GitHub provider implementation and provider-explicit consumer CLI are validated against the public Core `v1.3.0` contract line, but this repository does not yet publish its own packaged GitHub Release.
+**Published GitHub Release:** [`v0.1.0`](https://github.com/OrbitFabric/orbitfabric-github-release-source/releases/tag/v0.1.0) (2026-09-25). The released package version remains `0.1.0`.
 
-No universal Release Source provider protocol is defined by this repository.
+The release provides:
+
+```text
+orbitfabric_github_release_source-0.1.0-py3-none-any.whl
+orbitfabric_github_release_source-0.1.0.tar.gz
+SHA256SUMS
+```
+
+The release workflow built the wheel and sdist, downloaded the published artifacts and checked their bytes against its local builds before marking the GitHub Release public. CI and provider-explicit Consumer CLI E2E were successful at the release commit; the latter preserves historical FAROTECH release identity as an intentional regression lane.
+
+This confirms product publication and the stated CI evidence, not an independent post-publication clean-environment replay of the coordinated Core v1.4.0 + provider + F Prime v0.1.3 onboarding path. The Core-owned lifecycle and integration contracts retain candidate maturity. No universal Release Source provider protocol is defined by this repository.
+
+See [0.1.0 release notes](docs/releases/0.1.0.md) and [Architecture and Ownership](docs/architecture-and-ownership.md).
